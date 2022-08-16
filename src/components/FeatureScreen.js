@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from 'axios';  
+import Overview from "./Overview";
 
 function FeatureScreen() {
   const [city, setCity] = useState("");
@@ -137,6 +138,9 @@ function FeatureScreen() {
           </div>
         </div>
       </div>
+      <br />
+      <Overview arr={poi} />
+      <br />
     </div>
   );
 }
