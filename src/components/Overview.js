@@ -12,6 +12,14 @@ function Overview({arr}) {
       </span>
         //return <div key={title}>{title}</div>;
       })}
+      {/* <br/>
+      <br/>
+      <br/>
+      {cityarr.map(title => {
+       // return <Chip color="blue" value={title} />
+       return <h1>arr element is there</h1>
+        //return <div key={title}>{title}</div>;
+      })} */}
     </div>
   )
 }
