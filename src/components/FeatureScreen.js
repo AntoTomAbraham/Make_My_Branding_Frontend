@@ -5,6 +5,7 @@ import Overview from "./Overview";
 import Select from 'react-select'
 import PriceScreen from "./PriceScreen";
 import PriceComponent from "./PriceComponent";
+import Footer from "./Footer"
 
 function FeatureScreen() {
   const [city, setCity] = useState("");
@@ -225,6 +226,8 @@ function FeatureScreen() {
         <div class="mb-1 md:mb-0 md:w-1/3">
           <label for="forms-labelLeftInputCode">Enter size of location</label>
         </div>
+        <div class="md:w-2/3 md:flex-grow ">
+          <div class="flex justify-center">
         <Select
         id="size"
         value={sizs}
@@ -239,6 +242,8 @@ function FeatureScreen() {
         options={size}
       />
       </div>
+      </div>
+      </div>
       <br />
 
       {/* Nature of Location */}
@@ -246,6 +251,8 @@ function FeatureScreen() {
         <div class="mb-1 md:mb-0 md:w-1/3">
           <label for="forms-labelLeftInputCode">Nature of location</label>
         </div>
+        <div class="md:w-2/3 md:flex-grow ">
+          <div class="flex justify-center">
         <Select
         id="nature"
         value={natures}
@@ -260,6 +267,8 @@ function FeatureScreen() {
         options={natureOfLocation}
       />
       </div>
+      </div>
+      </div>
       <br />
 
       {/* LIGHT */}
@@ -267,6 +276,8 @@ function FeatureScreen() {
         <div class="mb-1 md:mb-0 md:w-1/3">
           <label for="forms-labelLeftInputCode">Do you want illumination</label>
         </div>
+        <div class="md:w-2/3 md:flex-grow ">
+          <div class="flex justify-center">
         <Select
         id="light"
         value={islights}
@@ -283,11 +294,15 @@ function FeatureScreen() {
         options={light}
       />
       </div>
+      </div>
+      </div>
       <br />
       <div class="text-gray-700 md:flex md:items-center px-16">
         <div class="mb-1 md:mb-0 md:w-1/3">
           <label for="forms-labelLeftInputCode">Enter Age Group</label>
         </div>
+        <div class="md:w-2/3 md:flex-grow ">
+          <div class="flex justify-center">
         <Select
         id="age"
         value={ages}
@@ -304,11 +319,15 @@ function FeatureScreen() {
         options={Age}
       />
       </div>
+      </div>
+      </div>
       <br />
       <div class="text-gray-700 md:flex md:items-center px-16">
         <div class="mb-1 md:mb-0 md:w-1/3">
           <label for="forms-labelLeftInputCode">Select OOH Category</label>
         </div>
+        <div class="md:w-2/3 md:flex-grow ">
+          <div class="flex justify-center">
         <Select
         id="ooh"
         value={oohs}
@@ -325,6 +344,8 @@ function FeatureScreen() {
         options={Ooh}
       />
       </div>
+      </div>
+      </div>
       <br />
       <br />
       <div class="grid place-content-center">
@@ -338,6 +359,7 @@ function FeatureScreen() {
       {/* <PriceScreen cityarr={cityResult} /> */}
       <PriceComponent price={price}/>
       <PriceScreen cityarr={cityResult}/>
+      <Footer />
       {/* <Overview arr={poi} /> */}
       <br />
     </div>
