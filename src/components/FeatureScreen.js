@@ -6,6 +6,8 @@ import Select from 'react-select'
 import PriceScreen from "./PriceScreen";
 import PriceComponent from "./PriceComponent";
 import Footer from "./Footer"
+import Works from "./Works";
+
 
 function FeatureScreen() {
   const [city, setCity] = useState("");
@@ -91,7 +93,13 @@ function FeatureScreen() {
   if(city!==""){}
   console.log(poi);  
   };
-  
+
+  const styles = {
+    container: base => ({
+      ...base,
+      flex: .5
+    })
+  };
 
   useEffect(()=>{
     const getdata= async () =>  {
@@ -146,15 +154,15 @@ function FeatureScreen() {
  }, [city] );
 
   return (
-    <div class="py-0">
-      <h3 class=" py-0 text-gray-800 font-bold leading-tight text-5xl mt-0 mb-2 px-16">
-        Find the best prices here🚀🚀
+    <div class="py-0 dark:text-slate-400">
+      <h3 class=" py-0 dark:text-white text-gray-800 font-bold leading-tight text-5xl mt-0 mb-2 px-16">
+        Determine your Ad Rates
       </h3>
       <br />
       <br />
       <div class="text-gray-700 md:flex md:items-center px-16">
-        <div class="mb-1 md:mb-0 md:w-1/3 ">
-          <label for="forms-labelLeftInputCode">District</label>
+        <div class="mb-1 md:mb-0 md:w-1/3 dark:text-white">
+          <label for="forms-labelLeftInputCode ">District</label>
         </div>
         <div class="md:w-2/3 md:flex-grow ">
           <div class="flex justify-center">
@@ -179,6 +187,7 @@ function FeatureScreen() {
                 value={city}
                 defaultValue={city}
                 id="city"
+                styles={styles}
                 onChange={
                   handleChange
                 }
@@ -198,13 +207,15 @@ function FeatureScreen() {
       <br />
       {/* Location */}
       <div class="text-gray-700 md:flex md:items-center px-16">
-        <div class="mb-1 md:mb-0 md:w-1/3">
+        <div class="mb-1 md:mb-0 md:w-1/3 dark:text-white">
           <label for="forms-labelLeftInputCode">Location Type</label>
         </div>
         <div class="md:w-2/3 md:flex-grow ">
           <div class="flex justify-center">
         <Select
         id="locType"
+        placeholder="Select location..."
+        styles={styles}
         value={locTypes}
         className="locType"
         onChange={(e)=>{
@@ -223,13 +234,15 @@ function FeatureScreen() {
 
       {/* Nature of Location */}
       <div class="text-gray-700 md:flex md:items-center px-16">
-        <div class="mb-1 md:mb-0 md:w-1/3">
-          <label for="forms-labelLeftInputCode">Enter size of location</label>
+        <div class="mb-1 md:mb-0 md:w-1/3 dark:text-white">
+          <label for="forms-labelLeftInputCode">Enter size of Advertisment</label>
         </div>
         <div class="md:w-2/3 md:flex-grow ">
           <div class="flex justify-center">
         <Select
         id="size"
+        placeholder="Select Size of the hoardings"
+        styles={styles}
         value={sizs}
         className="size"
         onChange={(e)=>{
@@ -248,13 +261,15 @@ function FeatureScreen() {
 
       {/* Nature of Location */}
       <div class="text-gray-700 md:flex md:items-center px-16">
-        <div class="mb-1 md:mb-0 md:w-1/3">
+        <div class="mb-1 md:mb-0 md:w-1/3 dark:text-white">
           <label for="forms-labelLeftInputCode">Nature of location</label>
         </div>
         <div class="md:w-2/3 md:flex-grow ">
           <div class="flex justify-center">
         <Select
         id="nature"
+        placeholder="Select Location type"
+        styles={styles}
         value={natures}
         className="nature"
         onChange={(e)=>{
@@ -273,13 +288,15 @@ function FeatureScreen() {
 
       {/* LIGHT */}
       <div class="text-gray-700 md:flex md:items-center px-16">
-        <div class="mb-1 md:mb-0 md:w-1/3">
+        <div class="mb-1 md:mb-0 md:w-1/3 dark:text-white">
           <label for="forms-labelLeftInputCode">Do you want illumination</label>
         </div>
         <div class="md:w-2/3 md:flex-grow ">
           <div class="flex justify-center">
         <Select
         id="light"
+        placeholder="Do you need Illumination"
+        styles={styles}
         value={islights}
         className="light"
         onChange={(e)=>{
@@ -298,13 +315,15 @@ function FeatureScreen() {
       </div>
       <br />
       <div class="text-gray-700 md:flex md:items-center px-16">
-        <div class="mb-1 md:mb-0 md:w-1/3">
+        <div class="mb-1 md:mb-0 md:w-1/3 dark:text-white">
           <label for="forms-labelLeftInputCode">Enter Age Group</label>
         </div>
         <div class="md:w-2/3 md:flex-grow ">
           <div class="flex justify-center">
         <Select
         id="age"
+        placeholder="Select Age Group"
+        styles={styles}
         value={ages}
         className="age"
         onChange={(e)=>{
@@ -323,13 +342,16 @@ function FeatureScreen() {
       </div>
       <br />
       <div class="text-gray-700 md:flex md:items-center px-16">
-        <div class="mb-1 md:mb-0 md:w-1/3">
+        <div class="mb-1 md:mb-0 md:w-1/3 dark:text-white">
           <label for="forms-labelLeftInputCode">Select OOH Category</label>
         </div>
         <div class="md:w-2/3 md:flex-grow ">
           <div class="flex justify-center">
-        <Select
+      <Select
         id="ooh"
+        placeholder="Select OOH Category"
+        styles={styles}
+        class="flex w-full"
         value={oohs}
         className="ooh"
         onChange={(e)=>{
@@ -349,7 +371,7 @@ function FeatureScreen() {
       <br />
       <br />
       <div class="grid place-content-center">
-      <button onClick={getData} class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+      <button onClick={getData} type="button" class="inline-block px-6 py-2.5 bg-blue-400 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-500 hover:shadow-lg focus:bg-blue-500 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-600 active:shadow-lg transition duration-150 ease-in-out">
           Get Price
       </button>
       </div>
@@ -359,6 +381,7 @@ function FeatureScreen() {
       {/* <PriceScreen cityarr={cityResult} /> */}
       <PriceComponent price={price}/>
       <PriceScreen cityarr={cityResult}/>
+      {/* <Works /> */}
       <Footer />
       {/* <Overview arr={poi} /> */}
       <br />

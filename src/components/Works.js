@@ -1,11 +1,9 @@
 import React from 'react'
 
-function Landing() {
-    
+function Works() {
   return (
-    <div>
-        <section class="mb-40 py-0">
-    <nav class="navbar navbar-expand-lg shadow-md py-2 bg-white dark:bg-slate-800 relative flex items-center w-full justify-between">
+    <div class="pl-12">
+         <nav class="navbar navbar-expand-lg shadow-md py-2 bg-white dark:bg-slate-800 relative flex items-center w-full justify-between">
       <div class="px-6 w-full flex flex-wrap items-center justify-between">
         <div class="flex items-center">
           <button
@@ -41,23 +39,23 @@ function Landing() {
         <div class="navbar-collapse collapse grow items-center" id="navbarSupportedContentY">
           <ul class="navbar-nav mr-auto lg:flex lg:flex-row">
             <li class="nav-item">
-              <a class="dark:text-white nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out" href="/works" data-mdb-ripple="true" data-mdb-ripple-color="light">Dashboard</a>
+              <a class="dark:text-white nav-link block pr-2 lg:px-2 py-2 text-gray-600 hover:text-gray-700 focus:text-gray-700 transition duration-150 ease-in-out" href="/works" data-mdb-ripple="true" data-mdb-ripple-color="light">About US</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-
-    <div class="text-center dark:bg-slate-800 text-gray-800 py-24 px-6">
-      <h1 class="text-5xl dark:text-white md:text-6xl xl:text-7xl font-bold tracking-tight mb-12">Making it Visible! <br />
-      <span class="text-sm tracking-tighter text-justify">We will help you to determine advertisment rates at key location in a India</span></h1>
-      {/* <a class="inline-block px-7 py-3 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="light" href="#!" role="button">Get started</a>
-    <a class="inline-block px-7 py-3 bg-transparent text-blue-600 font-medium text-sm leading-snug uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out" data-mdb-ripple="true" data-mdb-ripple-color="light" href="#!" role="button">Learn more</a> */}
+        <br />
+        <h3 class="text-5xl dark:text-white">How we work ?</h3>
+        <br />
+        <p class="dark:text-white">This website helps people who want to know about the price of advertisement hoardings as they desire. this works by taking in certain factors such as type of location, state, age group,  nature of location, etc. by taking all these factors we use a random forest regression model to find the accurate price for the details provided by the user.</p>
+        <br />
+    <div class="text-white grid items-center justify-center">
+        <img src="https://drive.google.com/uc?export=view&id=1bWYOS6aWj4a07_6_kVGTcePsVokERPTH" height={630} width={630} alt="drive image"/>
+        <br />
     </div>
-    
-  </section>
     </div>
   )
 }
 
-export default Landing
+export default Works
