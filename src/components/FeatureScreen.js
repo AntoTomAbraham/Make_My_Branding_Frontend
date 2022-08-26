@@ -3,8 +3,8 @@ import { useState,useEffect } from "react";
 import axios from 'axios';  
 import Overview from "./Overview";
 import Select from 'react-select'
-//import AsyncSelect from 'react-select/async';
-//import PriceScreen from "./PriceScreen";
+import PriceScreen from "./PriceScreen";
+import PriceComponent from "./PriceComponent";
 
 function FeatureScreen() {
   const [city, setCity] = useState("");
@@ -12,24 +12,55 @@ function FeatureScreen() {
   const [locType, setlocType] = useState("");
   const [nature, setnature] = useState("");
   const [islight, setislight] = useState("");
+  const [age, setage] = useState("");
   const [poi, setPoi] = useState([]);
   const [cityResult, setcityResult] = useState([]);
   const [siz, setsiz] = useState([]);
+  const [cityOutput, setcityOutput] = useState([]);
 
   const [locTypes, setlocTypes] = useState("");
   const [natures, setnatures] = useState("");
+  const [oohs, setoohs] = useState("");
   const [islights, setislights] = useState("");
+  const [ages, setages] = useState("");
   const [pois, setPois] = useState([]);
   const [cityResults, setcityResults] = useState([]);
   const [sizs, setsizs] = useState([]);
+  const [price, setprice] = useState("");
 
   const [natureOfLocation, setnatureOfLocation] = useState([]);
   const [light, setlight] = useState([]);
+  const [Age, setAge] = useState([]);
   const [loc, setloc] = useState([]);
   const [size, setsize] = useState([]);
+  const [Ooh, setOoh] = useState([]);
 
-  const getData=async event=>{
-    console.log(siz+" "+islight+" "+nature+" "+locType+" "+city)
+  const getData=async event => {
+    console.log(siz+" "+islight+" "+nature+" "+locType+" "+city+" "+age+" "+ooh)
+    //`http://localhost:5000/predict?Location=${city}&NOL=${nature}&LocType=${locType}&Category=Hoardings&Size=${siz}&PPI=Low&Light=${islight}`
+    await axios.post(`http://localhost:5000/predict?Location=${city}&NOL=${nature}&LocType=${locType}&Category=Hoardings&Size=${siz}&PPI=Low&Light=${islight}&AgeGroup=${age}&Category=${ooh}`).then(res=>{
+      console.log("getting res");
+      console.log(res.data["price"]);
+      setprice(res.data["price"])
+      console.log(price)
+    })
+    await axios.post("http://localhost:8080/api/readCsv",{"city":city,"Light": islight,"NatureOfLocation": nature,"LocationType": locType}).then(res=>{
+      console.log(res)
+      console.log(res.data['response']['cityResult']);
+      var unique=res.data['response']['cityResult'].filter((v, i, a) => a.indexOf(v) === i);
+      console.log(unique)
+      setcityResult(unique)
+      setcityOutput(unique)
+      console.log("This is city output and length");
+      console.log(cityOutput);
+      console.log(cityOutput.length);
+      // console.log(cityResult)
+    })
+    await axios.post("http://localhost:8080/api/getOverview",{"city":city}).then(res=>{
+      console.log("getting res");
+      console.log(res.data['response']['poi']);
+      setPoi(res.data['response']['poi'])
+    })
   }
 
   const handleChange = async (event) =>  {
@@ -53,61 +84,10 @@ function FeatureScreen() {
     console.log(city);
 
     if(city!==""){
-    //gettingoverview
-    await axios.post("http://localhost:8080/api/getOverview",{"city":city}).then(res=>{
-      console.log("getting res");
-      console.log(res.data['response']['poi']);
-      setPoi(res.data['response']['poi'])
-    })
   console.log("readCSV")
-  setcityResult([]);
   }
 
-  if(city!==""){
-    await axios.post("http://localhost:8080/api/readCsv",{"city":city}).then(res=>{
-      console.log("getting res for readCsv");
-      console.log(res.data['response']['cityResult']);
-      setcityResult(res.data['response']['cityResult'])
-      console.log(cityResult)
-      var uniquecityResult = cityResult.filter((v, i, a) => a.indexOf(v) === i);
-      console.log(uniquecityResult)
-      setcityResult(uniquecityResult)
-    })
-
-    // await axios.post("http://localhost:8080/api/readNatureOfLocation",{"city":city}).then(res=>{
-    //   console.log("getting res");
-    //   console.log(res.data['response']['sizeResult']);
-    //   setnatureOfLocation(res.data['response']['sizeResult'])
-    //   console.log("nature of location")
-    //   console.log(natureOfLocation);
-    // })
-
-    // await axios.post("http://localhost:8080/api/readLight",{"city":city}).then(res=>{
-    //   console.log("getting res");
-    //   console.log(res.data['response']['sizeResult']);
-    //   setlight(res.data['response']['sizeResult'])
-    //   console.log("nature of location")
-    //   console.log(light);
-    // })
-
-    // await axios.post("http://localhost:8080/api/readLocationtype",{"city":city}).then(res=>{
-    //   console.log("getting res");
-    //   console.log(res.data['response']['sizeResult']);
-    //   setloc(res.data['response']['sizeResult'])
-    //   console.log("nature of location")
-    //   console.log(light);
-    // })
-
-    // await axios.post("http://localhost:8080/api/readSize",{"city":city}).then(res=>{
-    //   console.log("getting res");
-    //   console.log(res.data['response']['sizeResult']);
-    //   setsize(res.data['response']['sizeResult'])
-    //   console.log("nature of location")
-    //   console.log(size);
-    // })
-  }
-
-  console.log(cityResult);  
+  if(city!==""){}
   console.log(poi);  
   };
   
@@ -143,22 +123,37 @@ function FeatureScreen() {
       console.log("nature of location")
       console.log(size);
     })
-    }
 
-    }   //console.log("enter")
+    await axios.post("http://localhost:8080/api/readAgeGroup",{"city":city}).then(res=>{
+      console.log("getting res");
+      console.log(res.data['response']['sizeResult']);
+      setAge(res.data['response']['sizeResult'])
+      console.log("nature of location")
+      console.log(size);
+    })
+
+    await axios.post("http://localhost:8080/api/readHoardingCategory",{"city":city}).then(res=>{
+      console.log("getting res");
+      console.log(res.data['response']['sizeResult']);
+      setOoh(res.data['response']['sizeResult'])
+      //console.log("nature of location")
+      //console.log(size);
+    })
+    }
+    }  
     getdata()
  }, [city] );
 
   return (
     <div class="py-0">
       <h3 class=" py-0 text-gray-800 font-bold leading-tight text-5xl mt-0 mb-2 px-16">
-        100x your Business 🚀🚀
+        Find the best prices here🚀🚀
       </h3>
       <br />
       <br />
       <div class="text-gray-700 md:flex md:items-center px-16">
         <div class="mb-1 md:mb-0 md:w-1/3 ">
-          <label for="forms-labelLeftInputCode">State</label>
+          <label for="forms-labelLeftInputCode">District</label>
         </div>
         <div class="md:w-2/3 md:flex-grow ">
           <div class="flex justify-center">
@@ -194,7 +189,6 @@ function FeatureScreen() {
                 <option value="Delhi">Delhi</option>
                 <option value="Kolkata">Kolkata</option>
                 <option value="Hyderabad">Hyderabad</option>
-                <option value="Kochi">Kochi</option>
               </select>
             </div>
           </div>
@@ -204,8 +198,10 @@ function FeatureScreen() {
       {/* Location */}
       <div class="text-gray-700 md:flex md:items-center px-16">
         <div class="mb-1 md:mb-0 md:w-1/3">
-          <label for="forms-labelLeftInputCode">Location</label>
+          <label for="forms-labelLeftInputCode">Location Type</label>
         </div>
+        <div class="md:w-2/3 md:flex-grow ">
+          <div class="flex justify-center">
         <Select
         id="locType"
         value={locTypes}
@@ -219,6 +215,8 @@ function FeatureScreen() {
         }}
         options={loc}
       />
+       </div>
+      </div>
       </div>
       <br />
 
@@ -267,7 +265,7 @@ function FeatureScreen() {
       {/* LIGHT */}
       <div class="text-gray-700 md:flex md:items-center px-16">
         <div class="mb-1 md:mb-0 md:w-1/3">
-          <label for="forms-labelLeftInputCode">Do you want light</label>
+          <label for="forms-labelLeftInputCode">Do you want illumination</label>
         </div>
         <Select
         id="light"
@@ -286,6 +284,48 @@ function FeatureScreen() {
       />
       </div>
       <br />
+      <div class="text-gray-700 md:flex md:items-center px-16">
+        <div class="mb-1 md:mb-0 md:w-1/3">
+          <label for="forms-labelLeftInputCode">Enter Age Group</label>
+        </div>
+        <Select
+        id="age"
+        value={ages}
+        className="age"
+        onChange={(e)=>{
+          const elem = e.currentTarget;
+          console.log(e.value)
+          console.log("value")
+          console.log(elem)
+          setages(elem)
+          setage(e.value);
+          console.log(age)
+        }}
+        options={Age}
+      />
+      </div>
+      <br />
+      <div class="text-gray-700 md:flex md:items-center px-16">
+        <div class="mb-1 md:mb-0 md:w-1/3">
+          <label for="forms-labelLeftInputCode">Select OOH Category</label>
+        </div>
+        <Select
+        id="ooh"
+        value={oohs}
+        className="ooh"
+        onChange={(e)=>{
+          const elem = e.currentTarget;
+          console.log(e.value)
+          console.log("value")
+          console.log(elem)
+          setoohs(elem)
+          setooh(e.value);
+          console.log(age)
+        }}
+        options={Ooh}
+      />
+      </div>
+      <br />
       <br />
       <div class="grid place-content-center">
       <button onClick={getData} class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
@@ -293,8 +333,12 @@ function FeatureScreen() {
       </button>
       </div>
       <br />
-      {/* <PriceScreen cityarr={cityResult} location={locType} natureOflocation={nature} ooh={ooh}/> */}
-      <Overview arr={poi} />
+     
+      
+      {/* <PriceScreen cityarr={cityResult} /> */}
+      <PriceComponent price={price}/>
+      <PriceScreen cityarr={cityResult}/>
+      {/* <Overview arr={poi} /> */}
       <br />
     </div>
   );
